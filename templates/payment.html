@@ -1,0 +1,24 @@
+{% extends 'dashboard.html' %}
+{% block content %}
+<form>
+    <div class="form-row">
+        <div class="form-group col-md-2">
+            <label for="name">Date:</label>
+            <input type="date" class="form-control" id="name">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="designation">Ledger:</label>
+            <input type="text" class="form-control" id="designation">
+        </div>
+        <div class="form-group col-md-1">
+            <label for="phone">Amount:</label>
+            <input type="text" class="form-control" id="phone">
+        </div>
+        <div class="form-group col-md-5">
+            <label for="remark">Remark:</label>
+            <input type="text" class="form-control" id="remark">
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary" style="background-color: #d9534f;">Save</button>
+</form>
+{% endblock %}

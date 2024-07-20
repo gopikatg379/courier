@@ -1,0 +1,36 @@
+{% extends 'dashboard.html' %}
+{% block content %}
+<div class="search-box">
+    <h4 style="font-weight: bold;">Search</h4><br>
+    <label for="consignorName">Consignee name:</label>
+    <input type="text" id="consignorName" name="consignorName">
+    <button type="button" class="btn btn-primary" style="background-color: #dc3545;">Search</button>
+</div>
+<div class="table-container">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Consignee Name</th>
+            <th>Address</th>
+            <th>Phone number</th>
+            <th>Active</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for x in con_data%}
+        <tr>
+            <td>{{x.consignee_name}}</td>
+            <td>{{x.address}}</td>
+            <td>{{x.phone_number}}</td>
+            <td>{{x.status}}</td>
+            <td>
+                <button class="btn btn-sm btn-warning"><a href=/edit_consignee/{{x.consignee_id}}><ion-icon name="create-outline"></ion-icon></a></button>
+                <button class="btn btn-sm btn-danger"><a href=/delete_consignee/{{x.consignee_id}}><ion-icon name="trash-outline"></ion-icon></a></button>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

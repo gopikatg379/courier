@@ -1,0 +1,29 @@
+{% extends 'dashboard.html' %}
+{% block content %}
+{% if messages %}
+<div class="alert alert-info">
+    {% for message in messages %}
+    {{ message }}
+    {% endfor %}
+</div>
+{% endif %}
+<form method="POST">
+    {% csrf_token %}
+    {% csrf_token %}
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="state">State:</label>
+            <input type="text" class="form-control" id="state" name="state" value="{{dis_obj.state}}">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="district_name">District:</label>
+            <input type="text" class="form-control" id="district_name" name="district_name" value="{{dis_obj.district_name}}">
+        </div>
+    </div>
+    <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="status" name="status" checked>
+        <label class="form-check-label" for="status">Active</label>
+    </div>
+    <button type="submit" class="btn btn-primary" style="background-color: #dc3545;">Save</button>
+</form>
+{% endblock %}

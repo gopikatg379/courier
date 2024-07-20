@@ -1,0 +1,32 @@
+{% extends 'dashboard.html' %}
+{% block content %}
+<div class="search-box">
+    <h4 style="font-weight: bold;">Search</h4>
+    <label for="consignorName">District</label>
+    <input type="text" id="consignorName" name="consignorName">
+    <button type="button" class="btn btn-primary" style="background-color: #d9534f;">Search</button>
+</div>
+<div class="table-container">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Vehicle number</th>
+            <th>Active</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for x in vehicle_data %}
+        <tr>
+            <td>{{x.vehicle_number}}</td>
+            <td>{{x.status}}</td>
+            <td>
+                <button class="btn btn-sm btn-warning"><a href=/edit_vehicle/{{x.vehicle_id}}><ion-icon name="create-outline"></ion-icon></a></button>
+                <button class="btn btn-sm btn-danger"><a href=/delete_vehicle/{{x.vehicle_id}}><ion-icon name="trash-outline"></ion-icon></a></button>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

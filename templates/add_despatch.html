@@ -1,0 +1,60 @@
+{% extends 'dashboard.html' %}
+{% block content %}
+<form method="POST">
+    {% csrf_token %}
+    {% csrf_token %}
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="date">Date:</label>
+            <input type="date" class="form-control" id="date" name="date">
+        </div>
+        <div class="form-group col-md-4">
+            <label for="driver_name">Driver:</label>
+            <select id="driver_name" name="driver_name" required style="width:410px;height:38px;background-color:white">
+                {% for x in Driver %}
+                <option value="{{x.driver_id}}">{{x.driver_name}}</option>
+                {%endfor%}
+            </select>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="vehicle_name">Vehicle:</label>
+            <select id="vehicle_name" name="vehicle_name" required style="width:410px;height:38px;background-color:white;">
+                {% for x in Vehicle %}
+                <option value="{{x.vehicle_id}}">{{x.vehicle_number}}</option>
+                {%endfor%}
+            </select>
+        </div>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th><input type="checkbox"></th>
+                <th>Booking Date</th>
+                <th>Consignor</th>
+                <th>Consignee</th>
+                <th>Booking No.</th>
+                <th>Destination</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for x in despatch_data %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td><input type="checkbox" name="booking_id" id="booking_id" value="{{x.booking_id}}"></td>
+                <td>{{x.date|date:"d/m/y"}}</td>
+                <td>{{x.consignor_name}}</td>
+                <td>{{x.consignee_name}}</td>
+                <td>{{x.booking_id}}</td>
+                <td>{{x.district_name}}</td>
+                <td>{{x.number_of_boxes}}</td>
+                <td>{{x.price}}</td>
+            </tr>
+        {%endfor%}
+        </tbody>
+    </table>
+    <button type="submit" class="btn btn-secondary" style="background-color: #dc3545;">Save</button>
+</form>
+{% endblock %}

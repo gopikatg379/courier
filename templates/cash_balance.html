@@ -1,0 +1,38 @@
+{% extends 'dashboard.html' %}
+{% block content %}
+<h4 style="font-weight: bold;">Cash Balance</h4>
+<div class="search-box">
+  <label for="fromDate">From Date &nbsp;</label>
+  <input type="date" id="fromDate" name="fromDate"> &nbsp; &nbsp; &nbsp;
+  <label for="toDate">To Date &nbsp;</label>
+  <input type="date" id="toDate" name="toDate"><br>
+  <button type="button" class="btn btn-primary" style="background-color: #d9534f;">Search</button>
+</div>
+<div class="table-container">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Date</th>
+            <th>Receipt Number</th>
+            <th>Cash Receipt Amount</th>
+            <th>Deposit ID Number</th>
+            <th>Total Deposit Amount</th>
+            <th>Cash In Hand</th>
+        </tr>
+        </thead>
+    </table>
+</div>
+<div class="table-container">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Opening Balance</th>
+            <th>Total Receipt</th>
+            <th>Total Deposit</th>
+            <th>Closing Balance</th>
+        </tr>
+        </thead>
+    </table>
+</div>
+{% endblock %}

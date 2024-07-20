@@ -1,0 +1,39 @@
+        .sidebar a:hover {
+            background-color: #575d63;
+            text-decoration: none;
+        }
+        .sidebar .nav-section {
+            font-weight: bold;
+            padding-left: 20px;
+            padding-top: 10px;
+        }
+        .main-content{
+            padding: 20px;
+        }
+        .header {
+            background-color: #dc3545;
+            color: white;
+            padding: 15px;
+        }
+        .search-box {
+            padding: 40px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            margin-bottom: 25px;
+        }
+        .search-box input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .search-box button {
+            float: right;
+        }
+        .table-container {
+            margin-top: 20px;
+        }
+        .table th, .table td {
+            vertical-align: middle;
+        }

@@ -1,0 +1,43 @@
+{% extends 'dashboard.html' %}
+{% block content %}
+<div class="search-box">
+    <h5 style="font-weight: bold;">Filter</h5><br>
+    <label for="fromDate">From Date:</label>
+    <input type="date" id="fromDate" name="fromDate">
+    <label for="fromDate">To Date:</label>
+    <input type="date" id="toDate" name="fromDate"><br>
+    <button type="button" class="btn btn-primary" style="background-color: #dc3545;">Search</button>
+</div>
+<div class="table-container">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Booking date</th>
+                <th>Booking number</th>
+                <th>Consignor</th>
+                <th>Consignee</th>
+                <th>Status</th>
+                <th>Action</th>
+
+            </tr>
+        </thead>
+        <tbody>
+        {% for x in booking_data%}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{x.date|date:"d/m/y"}}</td>
+                <td>{{x.booking_id}}</td>
+                <td>{{x.consignor_name}}</td>
+                <td>{{x.consignee_name}}</td>
+                <td>{{ booking.get_status_display }}</td>
+                <td>
+                    <button class="btn btn-sm btn-warning"><a href=/edit_booking/{{x.booking_id}}><ion-icon name="create-outline"></ion-icon></a></button>
+                    <button class="btn btn-sm btn-danger"><a href=/delete_booking/{{x.booking_id}}><ion-icon name="trash-outline"></ion-icon></a></button>
+                </td>
+            </tr>
+        {% endfor%}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

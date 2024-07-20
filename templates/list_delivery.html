@@ -1,0 +1,38 @@
+{% extends 'dashboard.html' %}
+{% block content %}
+<div class="search-box">
+    <h4 style="font-weight: bold;">Search</h4><br>
+    <label for="consignorName" >Status:</label>
+    <input type="text" id="consignorName" name="consignorName" style="width: 500px;"><br>
+    <button type="button" class="btn btn-primary" style="background-color: #dc3545;">Search</button>
+</div>
+<div class="table-container">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Consignor</th>
+            <th>Consignee</th>
+            <th>Destination</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for x in del_data%}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{ x.consignor_name }}</td>
+            <td>{{x.consignee_name}}</td>
+            <td>{{x.district_name}}</td>
+            <td>{{x.status}}</td>
+            <td>
+                <button class="btn btn-sm btn-warning"><a href=/edit_delivery/{{x.delivery_id}}><ion-icon name="create-outline"></ion-icon></a></button>
+                <button class="btn btn-sm btn-danger"><a href=/delete_delivery/{{x.delivery_id}}><ion-icon name="trash-outline"></ion-icon></a></button>
+            </td>
+        </tr>
+        {%endfor%}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
