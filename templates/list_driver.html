@@ -1,11 +1,14 @@
 {% extends 'dashboard.html' %}
 {% block content %}
-<div class="search-box">
-    <h4 style="font-weight: bold;">Search</h4><br>
-    <label for="consignorName">Driver name:</label>
-    <input type="text" id="consignorName" name="consignorName">
-    <button type="button" class="btn btn-primary" style="background-color: #dc3545;">Search</button>
-</div>
+<form method = 'POST'>
+    {% csrf_token %}
+    <div class="search-box">
+        <h4 style="font-weight: bold;">Search</h4><br>
+        <label for="consignorName">Driver name:</label>
+        <input type="text" id="consignorName" name="consignorName">
+        <button type="submit" class="btn btn-primary" style="background-color: #dc3545;">Search</button>
+    </div>
+</form>
 <div class="table-container">
     <table class="table table-bordered">
         <thead>

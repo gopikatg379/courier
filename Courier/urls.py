@@ -46,7 +46,7 @@ urlpatterns = [
                   path('add_ledger', admin_views.add_ledger),
                   path('list_ledger', admin_views.list_ledger),
                   path('payment', admin_views.payment),
-                  path('receipt', admin_views.receipt),
+                  path('receipt', staff_views.receipt),
                   path('cash_balance', admin_views.cash_balance),
                   path('designation', admin_views.designation),
                   path('delete_dis/<int:district_id>/', admin_views.delete_dis),

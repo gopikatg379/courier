@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Login, Vehicle, Driver, District, Consignee, Consignor, Staff, Designation
+from .models import Login, Vehicle, Driver, District, Consignee, Consignor, Staff, Designation,Ledger
 from django.contrib import messages
 from django.db.models import Q
 
@@ -89,7 +89,12 @@ def add_consignee(request):
 
 def list_consignee(request):
     data = Consignee.objects.all()
-    return render(request, 'list_consignee.html', {'con_data': data})
+    search_data = data
+    if request.method == 'POST':
+        search = request.POST.get('consignorName')
+        if search:
+            search_data = Consignee.objects.filter(consignee_name__icontains=search)
+    return render(request, 'list_consignee.html', {'con_data': search_data})
 
 
 def add_user(request):
@@ -127,7 +132,12 @@ def add_user(request):
 
 def list_user(request):
     user_data = Staff.objects.all()
-    return render(request, 'list_user.html', {'user_data': user_data})
+    search_data = user_data
+    if request.method == 'POST':
+        search = request.POST.get('consignorName')
+        if search:
+            search_data = Staff.objects.filter(staff_name__icontains=search)
+    return render(request, 'list_user.html', {'user_data': search_data})
 
 
 def add_district(request):
@@ -153,7 +163,12 @@ def add_district(request):
 
 def list_district(request):
     district_data = District.objects.all()
-    return render(request, 'list_district.html', {'district_data': district_data})
+    search_data = district_data
+    if request.method == 'POST':
+        search = request.POST.get('consignorName')
+        if search:
+            search_data = District.objects.filter(district_name__icontains=search)
+    return render(request, 'list_district.html', {'district_data': search_data})
 
 
 def add_vehicle(request):
@@ -176,7 +191,12 @@ def add_vehicle(request):
 
 def list_vehicle(request):
     data = Vehicle.objects.all()
-    return render(request, 'list_vehicle.html', {'vehicle_data': data})
+    search_data = data
+    if request.method == 'POST':
+        search = request.POST.get('consignorName')
+        if search:
+            search_data = Vehicle.objects.filter(vehicle_number__icontains=search)
+    return render(request, 'list_vehicle.html', {'vehicle_data': search_data})
 
 
 def add_driver(request):
@@ -200,25 +220,33 @@ def add_driver(request):
 
 def list_driver(request):
     driver_data = Driver.objects.all()
-    return render(request, 'list_driver.html', {'data': driver_data})
+    search_data = driver_data
+    if request.method == 'POST':
+        search = request.POST.get('consignorName')
+        if search:
+            search_data = search_data.filter(driver_name__icontains=search)
+    return render(request, 'list_driver.html', {'data': search_data})
 
 
 def add_ledger(request):
     if request.method == 'POST':
-        ledger_name = request.POST.get('ledger_name')
+        data = Ledger()
+        data.ledger_name = request.POST.get('ledger_name')
+        data.save()
+        return redirect('/add_ledger')
     return render(request, 'add_ledger.html')
 
 
 def list_ledger(request):
-    return render(request, 'list_ledger.html')
+    ledger_data = Ledger.objects.all()
+    return render(request, 'list_ledger.html', {'data':ledger_data})
 
 
 def cash_balance(request):
     return render(request, 'cash_balance.html')
 
 
-def receipt(request):
-    return render(request, 'receipt.html')
+
 
 
 def payment(request):

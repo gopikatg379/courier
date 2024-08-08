@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Booking, Delivery, Despatch, Consignor, Consignee, District, Driver, Vehicle
 from django.contrib import messages
+from django.core.paginator import Paginator
 
 
 # Create your views here.
@@ -60,7 +61,13 @@ def add_booking(request):
 
 def list_booking(request):
     data = Booking.objects.all()
-    return render(request, 'list_booking.html', {'booking_data': data})
+    search_data = data
+    if request.method == 'POST':
+        start_date = request.POST.get('startDate')
+        end_date = request.POST.get('endDate')
+        if start_date and end_date:
+            search_data = Booking.objects.filter(date__range=[start_date, end_date])
+    return render(request, 'list_booking.html', {'booking_data': search_data})
 
 
 def add_delivery(request):
@@ -107,7 +114,11 @@ def add_delivery(request):
 
 def list_delivery(request):
     data = Delivery.objects.all()
-    return render(request, 'list_delivery.html', {'del_data': data})
+    search_data = data
+    if request.method == 'POST':
+        search = request.POST.get('consignorName')
+        search_data = Delivery.objects.filter(status__icontains=search)
+    return render(request, 'list_delivery.html', {'del_data': search_data})
 
 
 def add_despatch(request):
@@ -158,7 +169,13 @@ def add_despatch(request):
 
 def list_despatch(request):
     data = Despatch.objects.all().prefetch_related('bookings')
-    return render(request, 'list_despatch.html', {'des_data': data})
+    search_data = data
+    if request.method == 'POST':
+        start_date = request.POST.get('startDate')
+        end_date = request.POST.get('endDate')
+        if start_date and end_date:
+            search_data = Despatch.objects.filter(date__range=[start_date, end_date])
+    return render(request, 'list_despatch.html', {'des_data': search_data})
 
 
 def delete_booking(request, booking_id):
@@ -181,3 +198,7 @@ def delete_delivery(request, delivery_id):
     messages.success(request, 'Data deleted successfully')
     return redirect('/list_delivery')
 
+
+def receipt(request):
+    receipt_data = Booking.objects.all()
+    return render(request, 'receipt.html', {'data': receipt_data})

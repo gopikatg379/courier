@@ -1,15 +1,18 @@
 {% extends 'dashboard.html' %}
 {% block content %}
-<div class="search-box">
-    <h5 style="font-weight: bold;">Filter</h5><br>
-    <label for="fromDate">From Date:</label>
-    <input type="date" id="fromDate" name="fromDate">
-    <label for="fromDate">To Date:</label>
-    <input type="date" id="toDate" name="fromDate"><br>
-    <button type="button" class="btn btn-primary" style="background-color: #dc3545;">Search</button>
-</div>
+<form method="POST">
+    {% csrf_token %}
+    <div class="search-box">
+        <h5 style="font-weight: bold;">Filter</h5><br>
+        <label for="fromDate">From Date:</label>
+        <input type="date" id="fromDate" name="startDate">
+        <label for="fromDate">To Date:</label>
+        <input type="date" id="toDate" name="endDate"><br>
+        <button type="submit" class="btn btn-primary" style="background-color: #dc3545;">Search</button>
+    </div>
+</form>
 <div class="table-container">
-    <table class="table table-bordered">
+    <table class="table table-bordered" id="bookingTable">
         <thead>
             <tr>
                 <th>#</th>

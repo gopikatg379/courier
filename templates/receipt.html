@@ -1,6 +1,7 @@
 {% extends 'dashboard.html' %}
 {% block content %}
-<form>
+<form method="POST">
+    {% csrf_token %}
     <div class="search-box">
         <h4 style="font-weight: bold;">Search</h4><br>
         <label for="date">Date:</label>
@@ -24,6 +25,18 @@
         </tr>
         </thead>
         <tbody>
+            {% for x in data %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td><input type="checkbox" name="booking_id" id="booking_id" value="{{x.booking_id}}"></td>
+            <td>{{x.date|date:"d/m/y"}}</td>
+            <td>{{x.consignor_name}}</td>
+            <td>{{x.consignee_name}}</td>
+            <td>{{x.booking_id}}</td>
+            <td>{{x.number_of_boxes}}</td>
+            <td>{{x.price}}</td>
+        </tr>
+        {% endfor %}
         </tbody>
     </table>
     <button type="submit" class="btn btn-save" style="background-color: #d9534f; color: white;">Save</button>

@@ -13,12 +13,12 @@ class Booking(models.Model):
     date = models.DateField()
     booking_id = models.AutoField(primary_key=True)
     consignor = models.ForeignKey(Consignor, on_delete=models.CASCADE)
-    consignor_name = models.CharField(max_length=255,default=1)
+    consignor_name = models.CharField(max_length=255, default=1)
     consignee = models.ForeignKey(Consignee, on_delete=models.CASCADE)
-    consignee_name = models.CharField(max_length=255,default=1)
+    consignee_name = models.CharField(max_length=255, default=1)
     consignee_address = models.CharField(max_length=200)
     district = models.ForeignKey(District, on_delete=models.CASCADE)
-    district_name = models.CharField(max_length=255,default=1)
+    district_name = models.CharField(max_length=255, default=1)
     number_of_boxes = models.IntegerField()
     weight = models.IntegerField()
     price = models.IntegerField()
@@ -58,3 +58,11 @@ class Delivery(models.Model):
 
     class Meta:
         db_table = 'delivery_table'
+
+
+class Receipt(models.Model):
+    receipt_id = models.AutoField(primary_key=True)
+    booking = models.ForeignKey(Booking, on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = 'receipt_table'
