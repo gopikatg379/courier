@@ -201,4 +201,8 @@ def delete_delivery(request, delivery_id):
 
 def receipt(request):
     receipt_data = Booking.objects.all()
-    return render(request, 'receipt.html', {'data': receipt_data})
+    search_data = receipt_data
+    if request.method == 'POST':
+        search = request.POST.get('consignorName')
+        search_data = Booking.objects.filter(date__icontains=search)
+    return render(request, 'receipt.html', {'data': search_data})
