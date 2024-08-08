@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Login, Vehicle, Driver, District, Consignee, Consignor, Staff, Designation
 from django.contrib import messages
+from django.db.models import Q
 
 
 # Create your views here.
@@ -54,7 +55,12 @@ def add_consignor(request):
 
 def list_consignor(request):
     consignor_data = Consignor.objects.all()
-    return render(request, 'list_consignor.html', {'data': consignor_data})
+    search_data = consignor_data
+    if request.method == 'POST':
+        search = request.POST.get('consignorName', '')
+        if search:
+            search_data = Consignor.objects.filter(consignor_name__icontains=search)
+    return render(request, 'list_consignor.html', {'data': search_data})
 
 
 def add_consignee(request):
